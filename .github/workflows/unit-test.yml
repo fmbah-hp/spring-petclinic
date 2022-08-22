@@ -54,6 +54,12 @@ jobs:
       - name: Run commands
         run: |
           ./mvnw install
+      - name: upload artefacts 
+        uses: actions/upload-artifact@v2
+        with: 
+          name: spring-petclinic-2.7.0-SNAPSHOT.jar
+          path: ./target/spring-petclinic-2.7.0-SNAPSHOT.jar
+
 
   maven-project-clean:
     timeout-minutes: 120
@@ -72,6 +78,12 @@ jobs:
       - name: Run commands
         run: |
           ./mvnw clean
+
+      - name: download artefacts 
+        uses: actions/download-artifact@v2
+        with: 
+          name: spring-petclinic-2.7.0-SNAPSHOT.jar
+          path: ./target
 
       - name: Run docker build
         run: docker build --tag wiremock-stubs .
