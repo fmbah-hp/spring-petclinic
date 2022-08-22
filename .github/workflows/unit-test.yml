@@ -1,16 +1,16 @@
 ### https://rubyyagi.com/how-to-run-tests-in-parallel-in-github-actions/
 ### https://github.com/rubyyagi/bookmarker/blob/main/.github/workflows/test.yml
 
-name: Unit Test Matrix
+name: UnitTestMatrix
 on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #   ci_node_total: [2]
-    #   ci_node_index: [0, 1]
+    strategy:
+      fail-fast: false
+      matrix:
+      ci_node_total: [2]
+      ci_node_index: [0, 1]
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
