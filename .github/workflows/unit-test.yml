@@ -6,11 +6,12 @@ on: [push, pull_request]
 jobs:
   maven-project-compile:
     runs-on: ubuntu-latest
+
+    name: Java ${{ matrix.java }} compile
     strategy:
       fail-fast: false
       matrix:
         java: [ 11, 12, 13 ]
-    name: Java ${{ matrix.java }} compile
 
     steps:
       - name: Checkout Source Code
