@@ -4,30 +4,26 @@
 name: UnitTestMatrix
 on: [push, pull_request]
 jobs:
-  maven-project:
+  maven-project-compile:
     runs-on: ubuntu-latest
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #   ci_node_total: [2]
-    #   ci_node_index: [0, 1]
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v2
-
-      - name: Test echo 
-        run: echo "hello"
-
-  maven-project-test:
-    needs: build
-    runs-on: ubuntu-latest
-
     strategy:
       fail-fast: false
       matrix:
-        ci_index: [0, 1, 2, 3]
-        ci_total: [4]
+        java: [ 11, 12, 13 ]
+    name: Java ${{ matrix.java }} compile
+
     steps:
-      - name: Checkout branch
+      - name: Checkout Source Code
         uses: actions/checkout@v2
         
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-package: jdk
+          java-version: ${{ matrix.java }}
+      - name: Compile the Project
+        working-directory: github-actions-java-maven
+        run: mvn -B compile
+
+
