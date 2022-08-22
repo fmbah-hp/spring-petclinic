@@ -4,7 +4,7 @@
 name: UnitTestMatrix
 on: [push, pull_request]
 jobs:
-  test:
+  maven-project:
     runs-on: ubuntu-latest
     # strategy:
     #   fail-fast: false
